@@ -22,6 +22,7 @@ Negates a value (returns the negative).
 
 ```css
 padding: --negate(1em);
+/* Output: padding: -1em; */
 ```
 
 ---
@@ -44,6 +45,7 @@ Linear interpolation between two values.
 
 ```css
 width: --lerp(100px, 200px, 0.5);
+/* Output: width: 150px; */
 ```
 
 ---
@@ -68,6 +70,7 @@ Maps a value from one range to another.
 
 ```css
 font-size: --map-range(50vw, 320px, 1920px, 14px, 24px);
+/* Output: Scales font from 14px at 320px viewport to 24px at 1920px viewport */
 ```
 
 ---
@@ -89,6 +92,7 @@ Returns the ratio of two values. Supports values with different units, unlike re
 
 ```css
 scale: --ratio(16px, 1em);
+/* Output: scale: 1; (assuming 1em = 16px) */
 ```
 
 ---
@@ -110,6 +114,7 @@ Returns a semi-transparent version of any color.
 
 ```css
 background: --opacity(blue, 50%);
+/* Output: background: rgb(0 0 255 / 0.5); */
 ```
 
 ---
@@ -132,6 +137,7 @@ Uses OKLab color space for perceptually uniform mixing.
 
 ```css
 background: --tint(blue, 20%);
+/* Output: background: oklab(0.532 -0.08 -0.192); (lighter blue) */
 ```
 
 ---
@@ -154,6 +160,7 @@ Uses OKLab color space for perceptually uniform mixing.
 
 ```css
 background: --shade(blue, 20%);
+/* Output: background: oklab(0.372 -0.08 -0.192); (darker blue) */
 ```
 
 ---
@@ -176,6 +183,7 @@ Uses OKLCH color space for perceptually uniform chroma adjustment. Chroma is cla
 
 ```css
 color: --saturate(red, 1.5);
+/* Output: color: oklch(0.628 0.4 29.234); (more saturated red) */
 ```
 
 ---
@@ -198,6 +206,7 @@ Uses OKLCH color space for perceptually uniform lightness adjustment. Maintains 
 
 ```css
 background: --lighten(blue, 20%);
+/* Output: background: oklch(0.652 0.24 264.052); (lighter blue) */
 ```
 
 ---
@@ -220,6 +229,7 @@ Uses OKLCH color space for perceptually uniform lightness adjustment. Unlike `--
 
 ```css
 background: --darken(blue, 20%);
+/* Output: background: oklch(0.252 0.24 264.052); (darker blue) */
 ```
 
 ---
@@ -242,6 +252,7 @@ Uses OKLCH color space for perceptually uniform hue rotation.
 
 ```css
 background: --rotate-hue(blue, 180deg);
+/* Output: background: oklch(0.452 0.24 84.052); (yellow-green) */
 ```
 
 ---
@@ -263,6 +274,7 @@ Uses OKLCH color space for perceptually accurate complementary colors.
 
 ```css
 border-color: --complement(blue);
+/* Output: border-color: oklch(0.452 0.24 84.052); (yellow-orange complement) */
 ```
 
 ---
@@ -283,6 +295,7 @@ Inverts a color.
 
 ```css
 background: --invert(white);
+/* Output: background: rgb(0 0 0); (black) */
 ```
 
 ---
@@ -304,6 +317,7 @@ Uses OKLCH color space by setting chroma to 0.
 
 ```css
 filter: --grayscale(var(--brand-color));
+/* Output: filter: oklch(0.452 0 264.052); (gray with same lightness) */
 ```
 
 ---
@@ -324,6 +338,7 @@ Returns black or white text color for optimal contrast on a background.
 
 ```css
 color: --text-on(var(--bg-color));
+/* Output: color: black; (or white, depending on background lightness) */
 ```
 
 ---
@@ -344,6 +359,7 @@ Removes transparency from a color, making it fully opaque.
 
 ```css
 background: --opaque(var(--semi-transparent-bg));
+/* Output: background: rgb(0 0 255); (removes alpha channel) */
 ```
 
 ---
@@ -367,6 +383,7 @@ Uses perceptually uniform OKLab color space for natural-looking color mixing.
 
 ```css
 background: --mix(red, blue, 30%);
+/* Output: background: oklab(0.537 0.126 -0.058); (reddish-purple) */
 ```
 
 ---
@@ -389,6 +406,7 @@ Triadic colors are evenly spaced around the color wheel (120° apart).
 
 ```css
 color: --triadic(blue, 1);
+/* Output: color: oklch(0.452 0.24 144.052); (120° rotation, green) */
 ```
 
 ---
@@ -411,6 +429,7 @@ Tetradic colors are evenly spaced around the color wheel (90° apart).
 
 ```css
 color: --tetradic(blue, 2);
+/* Output: color: oklch(0.452 0.24 174.052); (180° rotation, yellow-orange) */
 ```
 
 ---
@@ -431,6 +450,7 @@ Creates a semi-transparent black.
 
 ```css
 box-shadow: 0 2px 4px --black(20%);
+/* Output: box-shadow: 0 2px 4px rgb(0 0 0 / 0.2); */
 ```
 
 ---
@@ -451,6 +471,7 @@ Creates a semi-transparent white.
 
 ```css
 background: --white(90%);
+/* Output: background: rgb(255 255 255 / 0.9); */
 ```
 
 ---
@@ -475,6 +496,7 @@ NOTE: This function is mathematically equivalent to `--responsive-value()` but o
 
 ```css
 font-size: --fluid-type(16px, 24px, 320px, 1280px);
+/* Output: Scales from 16px at 320px viewport to 24px at 1280px viewport */
 ```
 
 ---
@@ -497,6 +519,7 @@ Creates a modular scale value.
 
 ```css
 font-size: --modular-scale(1rem, 1.25, 3);
+/* Output: font-size: 1.953rem; (1rem × 1.25³) */
 ```
 
 ---
@@ -519,6 +542,7 @@ Returns a length (e.g., 24px) rather than a unitless ratio. Use this when you ne
 
 ```css
 line-height: --line-height-length(16px, 1.6);
+/* Output: line-height: 25.6px; */
 ```
 
 ---
@@ -541,6 +565,7 @@ Returns a number (e.g., 1.5) which is recommended for better inheritance in CSS.
 
 ```css
 line-height: --line-height-ratio(24px, 16px);
+/* Output: line-height: 1.5; */
 ```
 
 ---
@@ -563,6 +588,7 @@ NOTE: Only works correctly with pixel font sizes. For rem/em values, use `--line
 
 ```css
 line-height: --line-height-unitless(16px, 1.5);
+/* Output: line-height: 1.5; */
 ```
 
 ---
@@ -584,6 +610,7 @@ Creates responsive sidebar layout columns.
 
 ```css
 grid-template-columns: --sidebar-layout(250px, 20ch);
+/* Output: grid-template-columns: 250px 1fr; (or stacks when content < 20ch) */
 ```
 
 ---
@@ -605,6 +632,7 @@ Conditional border radius that removes at viewport edges.
 
 ```css
 border-radius: --conditional-radius(1rem, 8px);
+/* Output: border-radius: 1rem; (0 when within 8px of viewport edge) */
 ```
 
 ---
@@ -629,6 +657,7 @@ NOTE: This function is mathematically equivalent to `--fluid-type()` but uses a 
 
 ```css
 padding: --responsive-value(1rem, 2rem, 320px, 1200px);
+/* Output: Scales from 1rem at 320px viewport to 2rem at 1200px viewport */
 ```
 
 ---
@@ -651,6 +680,7 @@ Calculates height from aspect ratio and maximum constraints.
 
 ```css
 height: --aspect-height(16/9, 100vw, 100vh);
+/* Output: height: 56.25vw; (maintains 16:9 ratio within constraints) */
 ```
 
 ---
@@ -673,6 +703,7 @@ Calculates width from aspect ratio and maximum constraints.
 
 ```css
 width: --aspect-width(16/9, 100vh, 100vw);
+/* Output: width: 177.78vh; (maintains 16:9 ratio within constraints) */
 ```
 
 ---
@@ -695,6 +726,7 @@ Recommended range: 0-10. Higher values create exponentially larger spacing.
 
 ```css
 margin: --spacing(3);
+/* Output: margin: 0.75rem; (0.25rem × 3) */
 ```
 
 ---
@@ -716,6 +748,7 @@ Creates inset spacing for containers.
 
 ```css
 padding: --container-padding(2rem, 1200px);
+/* Output: padding: calc((100% - 1200px) / 2 + 2rem); (responsive padding) */
 ```
 
 ---
@@ -736,6 +769,7 @@ Creates a simple easing curve value.
 
 ```css
 transform: translateY(--ease-out(var(--progress)));
+/* Output: Eased value between 0 and 1 with ease-out timing */
 ```
 
 ---
@@ -757,6 +791,7 @@ Creates elastic easing.
 
 ```css
 transform: scale(--elastic-ease(var(--progress), 1.2));
+/* Output: Eased value with elastic bounce effect */
 ```
 
 ---
@@ -778,6 +813,7 @@ Converts pixels to rem.
 
 ```css
 font-size: --px-to-rem(24px);
+/* Output: font-size: 1.5rem; (assuming 16px base) */
 ```
 
 ---
@@ -799,6 +835,7 @@ Converts rem to pixels.
 
 ```css
 width: --rem-to-px(2rem);
+/* Output: width: 32px; (assuming 16px base) */
 ```
 
 ---
@@ -820,6 +857,7 @@ Creates responsive grid columns.
 
 ```css
 grid-template-columns: --auto-grid(250px, 4);
+/* Output: grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); */
 ```
 
 ---
@@ -842,6 +880,7 @@ Ensures the span is an integer value.
 
 ```css
 grid-column: --grid-span(3, 12);
+/* Output: grid-column: span 3; */
 ```
 
 ---
@@ -865,6 +904,7 @@ Generates three shadow layers. The spread-factor controls how distributed the sh
 
 ```css
 box-shadow: --smooth-shadow(black, 20px, 3);
+/* Output: Multi-layered shadow with smooth depth effect */
 ```
 
 ---
@@ -887,6 +927,7 @@ Creates a glow effect.
 
 ```css
 box-shadow: --glow(cyan, 10px, 0.5);
+/* Output: box-shadow: 0 0 10px rgb(0 255 255 / 0.5); */
 ```
 
 ---
@@ -912,6 +953,7 @@ Works with ANY value type (colors, lengths, etc.), not just colors.
 
 ```css
 padding: --light-dark(0.75rem, 1rem);
+/* Output: padding: 0.75rem; (in light mode) or padding: 1rem; (in dark mode) */
 ```
 
 ---
@@ -937,6 +979,7 @@ In dark mode, mixes the base color with black (default 15% black).
 
 ```css
 background: --theme-color(blue, 80%, 20%);
+/* Output: Lighter blue in light mode, darker blue in dark mode */
 ```
 
 ---
