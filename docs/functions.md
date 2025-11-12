@@ -6,7 +6,7 @@ Complete reference for all CSS custom functions in css-extras.
 
 ---
 
-## `--negate()` [↗︎](../index.css#L19)
+## `--negate()` [↗︎](../index.css#L20)
 
 Negates a value (returns the negative).
 
@@ -27,7 +27,7 @@ padding: --negate(1em);
 
 ---
 
-## `--lerp()` [↗︎](../index.css#L32)
+## `--lerp()` [↗︎](../index.css#L34)
 
 Linear interpolation between two values.
 
@@ -50,7 +50,7 @@ width: --lerp(100px, 200px, 0.5);
 
 ---
 
-## `--map-range()` [↗︎](../index.css#L47)
+## `--map-range()` [↗︎](../index.css#L50)
 
 Maps a value from one range to another.
 
@@ -75,7 +75,7 @@ font-size: --map-range(50vw, 320px, 1920px, 14px, 24px);
 
 ---
 
-## `--ratio()` [↗︎](../index.css#L60)
+## `--ratio()` [↗︎](../index.css#L64)
 
 Returns the ratio of two values. Supports values with different units, unlike regular division.
 
@@ -97,7 +97,7 @@ scale: --ratio(16px, 1em);
 
 ---
 
-## `--opacity()` [↗︎](../index.css#L76)
+## `--opacity()` [↗︎](../index.css#L81)
 
 Returns a semi-transparent version of any color.
 
@@ -119,7 +119,7 @@ background: --opacity(blue, 50%);
 
 ---
 
-## `--tint()` [↗︎](../index.css#L90)
+## `--tint()` [↗︎](../index.css#L96)
 
 Lightens a color by mixing with white.
 Uses OKLab color space for perceptually uniform mixing.
@@ -142,7 +142,7 @@ background: --tint(blue, 20%);
 
 ---
 
-## `--shade()` [↗︎](../index.css#L104)
+## `--shade()` [↗︎](../index.css#L111)
 
 Darkens a color by mixing with black.
 Uses OKLab color space for perceptually uniform mixing.
@@ -165,7 +165,7 @@ background: --shade(blue, 20%);
 
 ---
 
-## `--saturate()` [↗︎](../index.css#L118)
+## `--saturate()` [↗︎](../index.css#L126)
 
 Adjusts color saturation.
 Uses OKLCH color space for perceptually uniform chroma adjustment. Chroma is clamped to 0.4 for safe display.
@@ -188,7 +188,7 @@ color: --saturate(red, 1.5);
 
 ---
 
-## `--lighten()` [↗︎](../index.css#L132)
+## `--lighten()` [↗︎](../index.css#L141)
 
 Adjusts color lightness.
 Uses OKLCH color space for perceptually uniform lightness adjustment. Maintains chroma independently.
@@ -211,7 +211,7 @@ background: --lighten(blue, 20%);
 
 ---
 
-## `--darken()` [↗︎](../index.css#L146)
+## `--darken()` [↗︎](../index.css#L156)
 
 Darkens a color by reducing lightness.
 Uses OKLCH color space for perceptually uniform lightness adjustment. Unlike `--shade()` which mixes with black, this directly reduces the lightness value.
@@ -234,7 +234,7 @@ background: --darken(blue, 20%);
 
 ---
 
-## `--rotate-hue()` [↗︎](../index.css#L160)
+## `--rotate-hue()` [↗︎](../index.css#L171)
 
 Rotates the hue of a color.
 Uses OKLCH color space for perceptually uniform hue rotation.
@@ -257,7 +257,7 @@ background: --rotate-hue(blue, 180deg);
 
 ---
 
-## `--complement()` [↗︎](../index.css#L173)
+## `--complement()` [↗︎](../index.css#L185)
 
 Returns the complementary color.
 Uses OKLCH color space for perceptually accurate complementary colors.
@@ -279,7 +279,7 @@ border-color: --complement(blue);
 
 ---
 
-## `--invert()` [↗︎](../index.css#L184)
+## `--invert()` [↗︎](../index.css#L197)
 
 Inverts a color.
 
@@ -300,7 +300,7 @@ background: --invert(white);
 
 ---
 
-## `--grayscale()` [↗︎](../index.css#L197)
+## `--grayscale()` [↗︎](../index.css#L211)
 
 Converts a color to grayscale.
 Uses OKLCH color space by setting chroma to 0.
@@ -322,7 +322,7 @@ filter: --grayscale(var(--brand-color));
 
 ---
 
-## `--text-on()` [↗︎](../index.css#L211)
+## `--text-on()` [↗︎](../index.css#L226)
 
 Returns black or white text color for optimal contrast on a background.
 
@@ -343,7 +343,7 @@ color: --text-on(var(--bg-color));
 
 ---
 
-## `--opaque()` [↗︎](../index.css#L222)
+## `--opaque()` [↗︎](../index.css#L238)
 
 Removes transparency from a color, making it fully opaque.
 
@@ -364,7 +364,7 @@ background: --opaque(var(--semi-transparent-bg));
 
 ---
 
-## `--mix()` [↗︎](../index.css#L237)
+## `--mix()` [↗︎](../index.css#L254)
 
 Mixes two colors in OKLab color space.
 Uses perceptually uniform OKLab color space for natural-looking color mixing.
@@ -388,7 +388,7 @@ background: --mix(red, blue, 30%);
 
 ---
 
-## `--triadic()` [↗︎](../index.css#L251)
+## `--triadic()` [↗︎](../index.css#L269)
 
 Returns a triadic color harmony.
 Triadic colors are evenly spaced around the color wheel (120° apart).
@@ -411,7 +411,7 @@ color: --triadic(blue, 1);
 
 ---
 
-## `--tetradic()` [↗︎](../index.css#L265)
+## `--tetradic()` [↗︎](../index.css#L284)
 
 Returns a tetradic (square) color harmony.
 Tetradic colors are evenly spaced around the color wheel (90° apart).
@@ -434,7 +434,7 @@ color: --tetradic(blue, 2);
 
 ---
 
-## `--black()` [↗︎](../index.css#L276)
+## `--black()` [↗︎](../index.css#L296)
 
 Creates a semi-transparent black.
 
@@ -455,7 +455,7 @@ box-shadow: 0 2px 4px --black(20%);
 
 ---
 
-## `--white()` [↗︎](../index.css#L287)
+## `--white()` [↗︎](../index.css#L308)
 
 Creates a semi-transparent white.
 
@@ -476,7 +476,7 @@ background: --white(90%);
 
 ---
 
-## `--fluid-type()` [↗︎](../index.css#L307)
+## `--fluid-type()` [↗︎](../index.css#L329)
 
 Creates fluid typography that scales with viewport.
 NOTE: This function is mathematically equivalent to `--responsive-value()` but optimized for typography. Use this for `font-size`, `--responsive-value()` for other properties.
@@ -501,7 +501,7 @@ font-size: --fluid-type(16px, 24px, 320px, 1280px);
 
 ---
 
-## `--modular-scale()` [↗︎](../index.css#L322)
+## `--modular-scale()` [↗︎](../index.css#L345)
 
 Creates a modular scale value.
 
@@ -524,7 +524,7 @@ font-size: --modular-scale(1rem, 1.25, 3);
 
 ---
 
-## `--line-height-length()` [↗︎](../index.css#L336)
+## `--line-height-length()` [↗︎](../index.css#L360)
 
 Calculates line height as a length value based on font size.
 Returns a length (e.g., 24px) rather than a unitless ratio. Use this when you need an absolute line height value.
@@ -547,7 +547,7 @@ line-height: --line-height-length(16px, 1.6);
 
 ---
 
-## `--line-height-ratio()` [↗︎](../index.css#L350)
+## `--line-height-ratio()` [↗︎](../index.css#L375)
 
 Calculates line height as a unitless ratio.
 Returns a number (e.g., 1.5) which is recommended for better inheritance in CSS.
@@ -570,7 +570,7 @@ line-height: --line-height-ratio(24px, 16px);
 
 ---
 
-## `--line-height-unitless()` [↗︎](../index.css#L364)
+## `--line-height-unitless()` [↗︎](../index.css#L390)
 
 Creates unitless line height from font size (recommended for better inheritance).
 NOTE: Only works correctly with pixel font sizes. For rem/em values, use `--line-height-length()` or `--line-height-ratio()` instead.
@@ -593,7 +593,7 @@ line-height: --line-height-unitless(16px, 1.5);
 
 ---
 
-## `--sidebar-layout()` [↗︎](../index.css#L380)
+## `--sidebar-layout()` [↗︎](../index.css#L407)
 
 Creates responsive sidebar layout columns.
 
@@ -615,7 +615,7 @@ grid-template-columns: --sidebar-layout(250px, 20ch);
 
 ---
 
-## `--conditional-radius()` [↗︎](../index.css#L392)
+## `--conditional-radius()` [↗︎](../index.css#L420)
 
 Conditional border radius that removes at viewport edges.
 
@@ -637,7 +637,7 @@ border-radius: --conditional-radius(1rem, 8px);
 
 ---
 
-## `--responsive-value()` [↗︎](../index.css#L409)
+## `--responsive-value()` [↗︎](../index.css#L438)
 
 Creates a responsive value that scales between two sizes.
 NOTE: This function is mathematically equivalent to `--fluid-type()` but uses a simpler lerp-based approach. Use this for spacing/sizing, `--fluid-type()` for typography.
@@ -662,7 +662,7 @@ padding: --responsive-value(1rem, 2rem, 320px, 1200px);
 
 ---
 
-## `--aspect-height()` [↗︎](../index.css#L424)
+## `--aspect-height()` [↗︎](../index.css#L454)
 
 Calculates height from aspect ratio and maximum constraints.
 
@@ -685,7 +685,7 @@ height: --aspect-height(16/9, 100vw, 100vh);
 
 ---
 
-## `--aspect-width()` [↗︎](../index.css#L438)
+## `--aspect-width()` [↗︎](../index.css#L469)
 
 Calculates width from aspect ratio and maximum constraints.
 
@@ -708,7 +708,7 @@ width: --aspect-width(16/9, 100vh, 100vw);
 
 ---
 
-## `--spacing()` [↗︎](../index.css#L457)
+## `--spacing()` [↗︎](../index.css#L489)
 
 Creates consistent spacing based on a scale.
 Recommended range: 0-10. Higher values create exponentially larger spacing.
@@ -731,7 +731,7 @@ margin: --spacing(3);
 
 ---
 
-## `--container-padding()` [↗︎](../index.css#L469)
+## `--container-padding()` [↗︎](../index.css#L502)
 
 Creates inset spacing for containers.
 
@@ -753,7 +753,7 @@ padding: --container-padding(2rem, 1200px);
 
 ---
 
-## `--ease-out()` [↗︎](../index.css#L486)
+## `--ease-out()` [↗︎](../index.css#L520)
 
 Creates a simple easing curve value.
 
@@ -774,7 +774,7 @@ transform: translateY(--ease-out(var(--progress)));
 
 ---
 
-## `--elastic-ease()` [↗︎](../index.css#L499)
+## `--elastic-ease()` [↗︎](../index.css#L534)
 
 Creates elastic easing.
 
@@ -796,7 +796,7 @@ transform: scale(--elastic-ease(var(--progress), 1.2));
 
 ---
 
-## `--px-to-rem()` [↗︎](../index.css#L516)
+## `--px-to-rem()` [↗︎](../index.css#L552)
 
 Converts pixels to rem.
 
@@ -818,7 +818,7 @@ font-size: --px-to-rem(24px);
 
 ---
 
-## `--rem-to-px()` [↗︎](../index.css#L528)
+## `--rem-to-px()` [↗︎](../index.css#L565)
 
 Converts rem to pixels.
 
@@ -840,7 +840,7 @@ width: --rem-to-px(2rem);
 
 ---
 
-## `--auto-grid()` [↗︎](../index.css#L544)
+## `--auto-grid()` [↗︎](../index.css#L582)
 
 Creates responsive grid columns.
 
@@ -862,7 +862,7 @@ grid-template-columns: --auto-grid(250px, 4);
 
 ---
 
-## `--grid-span()` [↗︎](../index.css#L561)
+## `--grid-span()` [↗︎](../index.css#L600)
 
 Creates a CSS grid span value.
 Ensures the span is an integer value.
@@ -885,7 +885,7 @@ grid-column: --grid-span(3, 12);
 
 ---
 
-## `--smooth-shadow()` [↗︎](../index.css#L580)
+## `--smooth-shadow()` [↗︎](../index.css#L620)
 
 Creates a smooth shadow.
 Generates three shadow layers. The spread-factor controls how distributed the shadows are.
@@ -909,7 +909,7 @@ box-shadow: --smooth-shadow(black, 20px, 3);
 
 ---
 
-## `--glow()` [↗︎](../index.css#L597)
+## `--glow()` [↗︎](../index.css#L638)
 
 Creates a glow effect.
 
@@ -932,7 +932,7 @@ box-shadow: --glow(cyan, 10px, 0.5);
 
 ---
 
-## `--light-dark()` [↗︎](../index.css#L621)
+## `--light-dark()` [↗︎](../index.css#L664)
 
 Theme-aware value switcher for light/dark mode.
 Uses CSS `if()` with color-scheme query. Requires `color-scheme: light dark` on `:root`.
@@ -953,12 +953,12 @@ Works with ANY value type (colors, lengths, etc.), not just colors.
 
 ```css
 padding: --light-dark(0.75rem, 1rem);
-/* Output: padding: 0.75rem; (in light mode) or padding: 1rem; (in dark mode) */
+/* Output: Lighter blue in light mode, darker blue in dark mode */
 ```
 
 ---
 
-## `--theme-color()` [↗︎](../index.css#L639)
+## `--theme-color()` [↗︎](../index.css#L682)
 
 Creates a theme-aware color with automatic adjustment.
 Uses CSS `if()` with color-scheme query. Requires `color-scheme: light dark` on `:root`.
@@ -979,7 +979,6 @@ In dark mode, mixes the base color with black (default 15% black).
 
 ```css
 background: --theme-color(blue, 80%, 20%);
-/* Output: Lighter blue in light mode, darker blue in dark mode */
 ```
 
 ---

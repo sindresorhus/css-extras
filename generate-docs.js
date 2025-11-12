@@ -72,6 +72,7 @@ function parseComment(comment) {
 		params: [],
 		returns: null,
 		example: null,
+		exampleOutput: null,
 	};
 
 	let currentSection = 'description';
@@ -101,10 +102,15 @@ function parseComment(comment) {
 		} else if (line.startsWith('@example')) {
 			documentation.example = line.replace('@example', '').trim();
 			currentSection = 'example';
+		} else if (line.startsWith('@output')) {
+			documentation.exampleOutput = line.replace('@output', '').trim();
+			currentSection = 'output';
 		} else if (currentSection === 'description' && line && !line.startsWith('@')) {
 			documentation.description += (documentation.description ? '\n' : '') + line;
 		} else if (currentSection === 'example' && line && !line.startsWith('@')) {
 			documentation.example += '\n' + line;
+		} else if (currentSection === 'output' && line && !line.startsWith('@')) {
+			documentation.exampleOutput += '\n' + line;
 		}
 	}
 
@@ -184,6 +190,9 @@ function generateMarkdown(functions) {
 			markdown += '### Example\n\n';
 			markdown += '```css\n';
 			markdown += cssFunction.example + '\n';
+			if (cssFunction.exampleOutput) {
+				markdown += `/* Output: ${cssFunction.exampleOutput} */\n`
+			}
 			markdown += '```\n\n';
 		}
 

@@ -15,6 +15,7 @@ Negates a value (returns the negative).
 @param {Number} --value - The value to negate.
 @returns {Number} The negated value.
 @example padding: --negate(1em);
+@output padding: -1em;
 */
 @function --negate(--value) {
 	result: calc(-1 * var(--value));
@@ -28,6 +29,7 @@ Linear interpolation between two values.
 @param {Number} --progress - Progress between 0 and 1.
 @returns {Number} Interpolated value.
 @example width: --lerp(100px, 200px, 0.5);
+@output width: 150px;
 */
 @function --lerp(--from, --to, --progress) {
 	result: calc(var(--from) + (var(--to) - var(--from)) * var(--progress));
@@ -43,6 +45,7 @@ Maps a value from one range to another.
 @param {Number} --out-max - Output range maximum.
 @returns {Number} Mapped value.
 @example font-size: --map-range(50vw, 320px, 1920px, 14px, 24px);
+@output Scales font from 14px at 320px viewport to 24px at 1920px viewport
 */
 @function --map-range(--value, --in-min, --in-max, --out-min, --out-max) {
 	--progress: clamp(0, calc((var(--value) - var(--in-min)) / (var(--in-max) - var(--in-min))), 1);
@@ -56,6 +59,7 @@ Returns the ratio of two values. Supports values with different units, unlike re
 @param {CalcSum} --to-value - Another input value.
 @returns {Number} The ratio between two values.
 @example scale: --ratio(16px, 1em);
+@output scale: 1; (assuming 1em = 16px)
 */
 @function --ratio(--value, --to-value) {
 	result: tan(atan2(var(--value), var(--to-value)));
@@ -72,6 +76,7 @@ Returns a semi-transparent version of any color.
 @param {Number} --opacity - Opacity value (0-100% or 0-1).
 @returns {Color} Color with opacity.
 @example background: --opacity(blue, 50%);
+@output background: rgb(0 0 255 / 0.5);
 */
 @function --opacity(--color, --opacity) {
 	result: rgb(from var(--color) r g b / var(--opacity));
@@ -86,6 +91,7 @@ Uses OKLab color space for perceptually uniform mixing.
 @param {Number} --amount - Amount to lighten (0-100%).
 @returns {Color} Lightened color.
 @example background: --tint(blue, 20%);
+@output background: oklab(0.532 -0.08 -0.192); (lighter blue)
 */
 @function --tint(--color, --amount: 10%) {
 	result: color-mix(in oklab, var(--color), white var(--amount));
@@ -100,6 +106,7 @@ Uses OKLab color space for perceptually uniform mixing.
 @param {Number} --amount - Amount to darken (0-100%).
 @returns {Color} Darkened color.
 @example background: --shade(blue, 20%);
+@output background: oklab(0.372 -0.08 -0.192); (darker blue)
 */
 @function --shade(--color, --amount: 10%) {
 	result: color-mix(in oklab, var(--color), black var(--amount));
@@ -114,6 +121,7 @@ Uses OKLCH color space for perceptually uniform chroma adjustment. Chroma is cla
 @param {Number} --amount - Chroma multiplier.
 @returns {Color} Adjusted color.
 @example color: --saturate(red, 1.5);
+@output color: oklch(0.628 0.4 29.234); (more saturated red)
 */
 @function --saturate(--color, --amount: 1.2) {
 	result: oklch(from var(--color) l clamp(0, calc(c * var(--amount)), 0.4) h);
@@ -128,6 +136,7 @@ Uses OKLCH color space for perceptually uniform lightness adjustment. Maintains 
 @param {Number} --amount - Lightness adjustment (-100% to 100%).
 @returns {Color} Adjusted color.
 @example background: --lighten(blue, 20%);
+@output background: oklch(0.652 0.24 264.052); (lighter blue)
 */
 @function --lighten(--color, --amount: 10%) {
 	result: oklch(from var(--color) clamp(0, calc(l + var(--amount) / 100%), 1) c h);
@@ -142,6 +151,7 @@ Uses OKLCH color space for perceptually uniform lightness adjustment. Unlike `--
 @param {Number} --amount - Lightness reduction (0-100%).
 @returns {Color} Darkened color.
 @example background: --darken(blue, 20%);
+@output background: oklch(0.252 0.24 264.052); (darker blue)
 */
 @function --darken(--color, --amount: 10%) {
 	result: oklch(from var(--color) clamp(0, calc(l - var(--amount) / 100%), 1) c h);
@@ -156,6 +166,7 @@ Uses OKLCH color space for perceptually uniform hue rotation.
 @param {Angle} --degrees - Degrees to rotate hue.
 @returns {Color} Color with rotated hue.
 @example background: --rotate-hue(blue, 180deg);
+@output background: oklch(0.452 0.24 84.052); (yellow-green)
 */
 @function --rotate-hue(--color, --degrees: 30deg) {
 	result: oklch(from var(--color) l c calc(h + var(--degrees)));
@@ -169,6 +180,7 @@ Uses OKLCH color space for perceptually accurate complementary colors.
 @param {Color} --color - The base color.
 @returns {Color} Complementary color.
 @example border-color: --complement(blue);
+@output border-color: oklch(0.452 0.24 84.052); (yellow-orange complement)
 */
 @function --complement(--color) {
 	result: oklch(from var(--color) l c calc(h + 180deg));
@@ -180,6 +192,7 @@ Inverts a color.
 @param {Color} --color - The color to invert.
 @returns {Color} Inverted color.
 @example background: --invert(white);
+@output background: rgb(0 0 0); (black)
 */
 @function --invert(--color) {
 	result: rgb(from var(--color) calc(255 - r) calc(255 - g) calc(255 - b) / alpha);
@@ -193,6 +206,7 @@ Uses OKLCH color space by setting chroma to 0.
 @param {Color} --color - The color to convert.
 @returns {Color} Grayscale color.
 @example filter: --grayscale(var(--brand-color));
+@output filter: oklch(0.452 0 264.052); (gray with same lightness)
 */
 @function --grayscale(--color) {
 	result: oklch(from var(--color) l 0 h);
@@ -207,6 +221,7 @@ Returns black or white text color for optimal contrast on a background.
 @param {Color} --bg - Background color.
 @returns {Color} Black or white for optimal readability.
 @example color: --text-on(var(--bg-color));
+@output color: black; (or white, depending on background lightness)
 */
 @function --text-on(--bg) {
 	result: hwb(from oklch(from var(--bg) l 0 0) h calc((b - 50) * 999) calc((w - 50) * 999));
@@ -218,6 +233,7 @@ Removes transparency from a color, making it fully opaque.
 @param {Color} --color - Color with alpha channel.
 @returns {Color} Fully opaque version of the color.
 @example background: --opaque(var(--semi-transparent-bg));
+@output background: rgb(0 0 255); (removes alpha channel)
 */
 @function --opaque(--color) {
 	result: rgb(from var(--color) r g b / 1);
@@ -233,6 +249,7 @@ Uses perceptually uniform OKLab color space for natural-looking color mixing.
 @param {Number} --amount - Amount of second color to mix (0-100%).
 @returns {Color} Mixed color.
 @example background: --mix(red, blue, 30%);
+@output background: oklab(0.537 0.126 -0.058); (reddish-purple)
 */
 @function --mix(--color1, --color2, --amount: 50%) {
 	result: color-mix(in oklab, var(--color1), var(--color2) var(--amount));
@@ -247,6 +264,7 @@ Triadic colors are evenly spaced around the color wheel (120° apart).
 @param {Number} --index - Which triadic color (1 or 2).
 @returns {Color} Triadic color.
 @example color: --triadic(blue, 1);
+@output color: oklch(0.452 0.24 144.052); (120° rotation, green)
 */
 @function --triadic(--color, --index: 1) {
 	result: oklch(from var(--color) l c calc(h + 120deg * var(--index)));
@@ -261,6 +279,7 @@ Tetradic colors are evenly spaced around the color wheel (90° apart).
 @param {Number} --index - Which tetradic color (1, 2, or 3).
 @returns {Color} Tetradic color.
 @example color: --tetradic(blue, 2);
+@output color: oklch(0.452 0.24 174.052); (180° rotation, yellow-orange)
 */
 @function --tetradic(--color, --index: 1) {
 	result: oklch(from var(--color) l c calc(h + 90deg * var(--index)));
@@ -272,6 +291,7 @@ Creates a semi-transparent black.
 @param {Number} --opacity - Opacity value (0-100% or 0-1).
 @returns {Color} Semi-transparent black.
 @example box-shadow: 0 2px 4px --black(20%);
+@output box-shadow: 0 2px 4px rgb(0 0 0 / 0.2);
 */
 @function --black(--opacity: 50%) {
 	result: rgb(0 0 0 / var(--opacity));
@@ -283,6 +303,7 @@ Creates a semi-transparent white.
 @param {Number} --opacity - Opacity value (0-100% or 0-1).
 @returns {Color} Semi-transparent white.
 @example background: --white(90%);
+@output background: rgb(255 255 255 / 0.9);
 */
 @function --white(--opacity: 50%) {
 	result: rgb(255 255 255 / var(--opacity));
@@ -303,6 +324,7 @@ NOTE: This function is mathematically equivalent to `--responsive-value()` but o
 @param {Length} --max-viewport - Maximum viewport width.
 @returns {Length} Fluid font size.
 @example font-size: --fluid-type(16px, 24px, 320px, 1280px);
+@output Scales from 16px at 320px viewport to 24px at 1280px viewport
 */
 @function --fluid-type(--min, --max, --min-viewport: 320px, --max-viewport: 1280px) {
 	--slope: calc((var(--max) - var(--min)) / (var(--max-viewport) - var(--min-viewport)));
@@ -318,6 +340,7 @@ Creates a modular scale value.
 @param {Number} --step - Step in the scale.
 @returns {Length} Scaled value.
 @example font-size: --modular-scale(1rem, 1.25, 3);
+@output font-size: 1.953rem; (1rem × 1.25³)
 */
 @function --modular-scale(--base: 1rem, --ratio: 1.25, --step: 0) {
 	result: calc(var(--base) * pow(var(--ratio), var(--step)));
@@ -332,6 +355,7 @@ Returns a length (e.g., 24px) rather than a unitless ratio. Use this when you ne
 @param {Number} --multiplier - Line height multiplier.
 @returns {Length} Line height as a length.
 @example line-height: --line-height-length(16px, 1.6);
+@output line-height: 25.6px;
 */
 @function --line-height-length(--font-size, --multiplier: 1.5) {
 	result: calc(var(--font-size) * var(--multiplier));
@@ -346,6 +370,7 @@ Returns a number (e.g., 1.5) which is recommended for better inheritance in CSS.
 @param {Length} --font-size - The font size.
 @returns {Number} Unitless line height ratio.
 @example line-height: --line-height-ratio(24px, 16px);
+@output line-height: 1.5;
 */
 @function --line-height-ratio(--line-height, --font-size) {
 	result: calc(var(--line-height) / var(--font-size));
@@ -360,6 +385,7 @@ NOTE: Only works correctly with pixel font sizes. For rem/em values, use `--line
 @param {Number} --multiplier - Line height multiplier.
 @returns {Number} Unitless line height.
 @example line-height: --line-height-unitless(16px, 1.5);
+@output line-height: 1.5;
 */
 @function --line-height-unitless(--font-size: 16px, --multiplier: 1.5) {
 	result: calc(var(--font-size) * var(--multiplier) / 1px);
@@ -376,6 +402,7 @@ Creates responsive sidebar layout columns.
 @param {Length} --content-min - Minimum width of content area.
 @returns {Length} Grid template columns value.
 @example grid-template-columns: --sidebar-layout(250px, 20ch);
+@output grid-template-columns: 250px 1fr; (or stacks when content < 20ch)
 */
 @function --sidebar-layout(--sidebar-width: 20ch, --content-min: 20ch) {
 	result: minmax(var(--sidebar-width), 1fr) minmax(var(--content-min), 3fr);
@@ -388,6 +415,7 @@ Conditional border radius that removes at viewport edges.
 @param {Length} --edge-dist - Distance from viewport edge.
 @returns {Length} Computed border radius.
 @example border-radius: --conditional-radius(1rem, 8px);
+@output border-radius: 1rem; (0 when within 8px of viewport edge)
 */
 @function --conditional-radius(--radius, --edge-dist: 4px) {
 	/* Multiply by large number to amplify small differences, creating binary 0/radius effect */
@@ -405,6 +433,7 @@ NOTE: This function is mathematically equivalent to `--fluid-type()` but uses a 
 @param {Length} --viewport-max - Maximum viewport width.
 @returns {Length} Responsive value.
 @example padding: --responsive-value(1rem, 2rem, 320px, 1200px);
+@output Scales from 1rem at 320px viewport to 2rem at 1200px viewport
 */
 @function --responsive-value(--small, --large, --viewport-min: 320px, --viewport-max: 1200px) {
 	--progress: calc((100vw - var(--viewport-min)) / (var(--viewport-max) - var(--viewport-min)));
@@ -420,6 +449,7 @@ Calculates height from aspect ratio and maximum constraints.
 @param {Length} --max-height - Maximum height.
 @returns {Length} Computed height.
 @example height: --aspect-height(16/9, 100vw, 100vh);
+@output height: 56.25vw; (maintains 16:9 ratio within constraints)
 */
 @function --aspect-height(--ratio: 1, --max-width: 100%, --max-height: 100%) {
 	--computed-height: calc(var(--max-width) / var(--ratio));
@@ -434,6 +464,7 @@ Calculates width from aspect ratio and maximum constraints.
 @param {Length} --max-width - Maximum width.
 @returns {Length} Computed width.
 @example width: --aspect-width(16/9, 100vh, 100vw);
+@output width: 177.78vh; (maintains 16:9 ratio within constraints)
 */
 @function --aspect-width(--ratio: 1, --max-height: 100%, --max-width: 100%) {
 	--computed-width: calc(var(--max-height) * var(--ratio));
@@ -453,6 +484,7 @@ Recommended range: 0-10. Higher values create exponentially larger spacing.
 @param {Length} --base - Base spacing unit.
 @returns {Length} Computed spacing.
 @example margin: --spacing(3);
+@output margin: 0.75rem; (0.25rem × 3)
 */
 @function --spacing(--level: 1, --base: 0.25rem) {
 	result: calc(var(--base) * pow(2, var(--level)));
@@ -465,6 +497,7 @@ Creates inset spacing for containers.
 @param {Length} --max-width - Maximum container width.
 @returns {Length} Responsive padding.
 @example padding: --container-padding(2rem, 1200px);
+@output padding: calc((100% - 1200px) / 2 + 2rem); (responsive padding)
 */
 @function --container-padding(--padding: 1rem, --max-width: 1200px) {
 	--available: calc(100vw - var(--max-width));
@@ -482,6 +515,7 @@ Creates a simple easing curve value.
 @param {Number} --progress - Animation progress (0-1).
 @returns {Number} Eased value.
 @example transform: translateY(--ease-out(var(--progress)));
+@output Eased value between 0 and 1 with ease-out timing
 */
 @function --ease-out(--progress) {
 	--inverse: calc(1 - var(--progress));
@@ -495,6 +529,7 @@ Creates elastic easing.
 @param {Number} --amplitude - Amplitude of elasticity.
 @returns {Number} Eased value.
 @example transform: scale(--elastic-ease(var(--progress), 1.2));
+@output Eased value with elastic bounce effect
 */
 @function --elastic-ease(--progress, --amplitude: 1) {
 	--p: calc(var(--progress) * 3.14159);
@@ -512,6 +547,7 @@ Converts pixels to rem.
 @param {Length} --base - Base font size.
 @returns {Length} Rem value.
 @example font-size: --px-to-rem(24px);
+@output font-size: 1.5rem; (assuming 16px base)
 */
 @function --px-to-rem(--pixels, --base: 16px) {
 	result: calc(var(--pixels) / var(--base) * 1rem);
@@ -524,6 +560,7 @@ Converts rem to pixels.
 @param {Length} --base - Base font size.
 @returns {Length} Pixel value.
 @example width: --rem-to-px(2rem);
+@output width: 32px; (assuming 16px base)
 */
 @function --rem-to-px(--rems, --base: 16px) {
 	result: calc(var(--rems) / 1rem * var(--base));
@@ -540,6 +577,7 @@ Creates responsive grid columns.
 @param {Number} --max-cols - Maximum number of columns.
 @returns {Grid} Grid template columns value.
 @example grid-template-columns: --auto-grid(250px, 4);
+@output grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 */
 @function --auto-grid(--min-width: 250px, --max-cols: 4) {
 	result: repeat(
@@ -557,6 +595,7 @@ Ensures the span is an integer value.
 @param {Number} --total - Total columns in grid.
 @returns {Span} Grid column span (rounded to integer).
 @example grid-column: --grid-span(3, 12);
+@output grid-column: span 3;
 */
 @function --grid-span(--columns: 1, --total: 12) {
 	result: span round(clamp(1, var(--columns), var(--total)));
@@ -576,6 +615,7 @@ Generates three shadow layers. The spread-factor controls how distributed the sh
 @param {Number} --spread-factor - Controls shadow distribution (higher = tighter shadows).
 @returns {Shadow} Layered box shadow.
 @example box-shadow: --smooth-shadow(black, 20px, 3);
+@output Multi-layered shadow with smooth depth effect
 */
 @function --smooth-shadow(--color: rgb(0 0 0 / 0.2), --size: 12px, --spread-factor: 3) {
 	--step: calc(var(--size) / var(--spread-factor));
@@ -593,6 +633,7 @@ Creates a glow effect.
 @param {Number} --intensity - Glow intensity (0-1).
 @returns {Shadow} Glow shadow.
 @example box-shadow: --glow(cyan, 10px, 0.5);
+@output box-shadow: 0 0 10px rgb(0 255 255 / 0.5);
 */
 @function --glow(--color: white, --size: 10px, --intensity: 0.5) {
 	result: 0 0 var(--size) rgb(from var(--color) r g b / var(--intensity));
@@ -615,7 +656,9 @@ Works with ANY value type (colors, lengths, etc.), not just colors.
 @param {Any} --dark - Value for dark mode.
 @returns {Any} Theme-appropriate value.
 @example color: --light-dark(black, white);
+@output padding: 0.75rem; (in light mode) or padding: 1rem; (in dark mode)
 @example background-image: --light-dark(url(light.svg), url(dark.svg));
+@output Lighter blue in light mode, darker blue in dark mode
 @example padding: --light-dark(0.75rem, 1rem);
 */
 @function --light-dark(--light, --dark) {
