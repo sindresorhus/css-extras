@@ -191,8 +191,9 @@ function generateMarkdown(functions) {
 			markdown += '```css\n';
 			markdown += cssFunction.example + '\n';
 			if (cssFunction.exampleOutput) {
-				markdown += `/* Output: ${cssFunction.exampleOutput} */\n`
+				markdown += `/* Output: ${cssFunction.exampleOutput} */\n`;
 			}
+
 			markdown += '```\n\n';
 		}
 
